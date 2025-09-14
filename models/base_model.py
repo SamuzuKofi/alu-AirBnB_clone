@@ -8,10 +8,10 @@ from sqlalchemy.ext.declarative import declarative_base
 class BaseModel:
 
     id = Column(String(60), primary_key=True,
-                     default=str(uuid.uuid4(), nullable=False))
-    created_at = Column(DateTime, nullable=False,
+                     default=str(uuid.uuid4()))
+    created_at = Column(DateTime,
                         default=datetime.utcnow())
-    updated_at = Column(DateTime,nullable=False,
+    updated_at = Column(DateTime,
                         default=datetime.utcnow())
 
     def __init__(self):
