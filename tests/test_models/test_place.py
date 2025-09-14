@@ -1,9 +1,8 @@
-#!/usr/bin/python3
 import unittest
-from models.base_model import add
+from models.place import add
 
 
-class TestBaseModel(unittest.TestCase):
+class TestPlace(unittest.TestCase):
     def test_add(self):
         result = add(2, 3)
         self.assertEqual(result, 5)
