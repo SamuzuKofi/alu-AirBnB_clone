@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import unittest
-from models.base_model import add,subtract,multiply,divide,modulus
+from models.base_model import add,subtract,multiply,divide,modulus,power
 
 
 class TestBaseModel(unittest.TestCase):
@@ -23,6 +23,9 @@ class TestBaseModel(unittest.TestCase):
     def test_modulus(self):
         result = modulus(5, 3)
         self.assertEqual(result, 2)
+    def test_power(self):
+        result = power(2, 3)
+        self.assertEqual(result, 8)
 
 if __name__ == '__main__':
     unittest.main()
