@@ -33,20 +33,3 @@ class BaseModel:
         if '_sa_instance_state' in dictionary:
             del dictionary['_sa_instance_state']
         return dictionary
-
-
-
-def add(x,y):
-        return x + y
-def subtract(x,y):
-        return x - y
-def multiply(x,y):
-        return x * y
-def divide(x,y):
-        if y == 0:
-            raise ValueError("Cannot divide by zero")
-        return x / y
-def modulus(x,y):
-        return x % y
-def power(x,y):
-        return x ** y
