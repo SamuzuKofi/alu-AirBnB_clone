@@ -1,6 +1,7 @@
 import cmd
 import sys
 
+
 class MyCommandLine(cmd.Cmd):
     intro = 'Welcome to MyCommandLine. Type help or ? to list commands.\n'
     prompt = '(mycli) '
