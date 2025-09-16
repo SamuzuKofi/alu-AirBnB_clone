@@ -1,11 +1,13 @@
 import uuid
-# import models
+import models
 from datetime import datetime
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
 
 class BaseModel:
+    __abstract__ = True
 
     id = Column(String(60), primary_key=True,
                      default=lambda:str(uuid.uuid4()))
@@ -16,15 +18,13 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
             """Initialize BaseModel"""
-            if kwargs != {}:
+            if kwargs:
                 for key, val in kwargs.items():
                     if key == '__class__':
                         continue
-                    if key == 'created_at' or key == 'updated_at':
+                    if key in ('created_at', 'updated_at') and isinstance(val, str):
                         val = datetime.fromisoformat(val)
-                    # elif key == 'updated_at':
-                    #     val = datetime.fromisoformat(val)
-                    self.__setattr__(key, val)
+                    setattr(self, key, val)
             else:
                 self.id = str(uuid.uuid4())
                 self.created_at = datetime.utcnow()
@@ -35,8 +35,8 @@ class BaseModel:
     
     def save(self):
         self.updated_at = datetime.utcnow()
-        # models.storage.new(self)
-        # models.storage.save()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         dictionary = self.__dict__.copy()
