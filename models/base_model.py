@@ -1,5 +1,5 @@
 import uuid
-import models
+# import models
 from datetime import datetime
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
@@ -8,17 +8,14 @@ from sqlalchemy.ext.declarative import declarative_base
 class BaseModel:
 
     id = Column(String(60), primary_key=True,
-                     default=str(uuid.uuid4()))
+                     default=lambda:str(uuid.uuid4()))
     created_at = Column(DateTime,
-                        default=datetime.utcnow())
+                        default=datetime.utcnow)
     updated_at = Column(DateTime,
-                        default=datetime.utcnow())
+                        default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
             """Initialize BaseModel"""
-
-            # if keyword argument is provided initialize class with the specified
-            # values
             if kwargs != {}:
                 for key, val in kwargs.items():
                     if key == '__class__':
@@ -38,8 +35,8 @@ class BaseModel:
     
     def save(self):
         self.updated_at = datetime.utcnow()
-        models.storage.new(self)
-        models.storage.save()
+        # models.storage.new(self)
+        # models.storage.save()
 
     def to_dict(self):
         dictionary = self.__dict__.copy()
